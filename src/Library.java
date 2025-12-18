@@ -22,19 +22,19 @@ public class Library {
         return x;
     }
 
-    public int arrayMin (int[] array ){
-        if (array.length == 0){
+    public int arrayMin(int[] array) {
+        if (array.length == 0) {
             return Integer.MAX_VALUE;
         }
         int min = array[0];
-        for (int i = 1; i < array.length; i++){
+        for (int i = 1; i < array.length; i++) {
             if (array[i] < min) {
                 min = array[i];
             }
         }
         System.out.println();
         System.out.println(min);
-return min;
+        return min;
     }
 
 }

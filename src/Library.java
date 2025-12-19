@@ -1,6 +1,7 @@
 import java.util.Random;
 
 public class Library {
+    int intMax;
 
     public static boolean checkSize(int size) {
         if (size < 0) {
@@ -37,4 +38,21 @@ public class Library {
         return min;
     }
 
+    public void maxIndex(int[] array) {
+        if (array.length == 0) {
+            int intMax = -1;
+            return;
+        }
+        intMax = 0;
+        for (int i = 1; i < array.length; i++) {
+            if (array[i] > array[intMax]) {
+                intMax = i;
+                System.out.println(intMax);
+            }
+        }
+    }
+
+    public int getIntMax() {
+        return intMax;
+    }
 }

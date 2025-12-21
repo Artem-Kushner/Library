@@ -1,7 +1,7 @@
 import java.util.Random;
 
 public class Library {
-    int intMax;
+    private int intMax;
 
     public static boolean checkSize(int size) {
         if (size < 0) {
@@ -17,9 +17,7 @@ public class Library {
         for (int i = 0; i < size; i++) {
             int rand = max - min + 1;
             x[i] = random.nextInt(rand) + min;
-            System.out.print(x[i] + ", ");
         }
-
         return x;
     }
 
@@ -34,7 +32,6 @@ public class Library {
             }
         }
         System.out.println();
-        System.out.println(min);
         return min;
     }
 
@@ -47,7 +44,6 @@ public class Library {
         for (int i = 1; i < array.length; i++) {
             if (array[i] > array[intMax]) {
                 intMax = i;
-                System.out.println(intMax);
             }
         }
     }

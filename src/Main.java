@@ -1,37 +1,34 @@
 import java.util.Scanner;
-
 // TODO это то что ниже что такое? Тоже удалить
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Выберите размер массива: ");
         int size;
         int min;
         int max;
         do {
+            System.out.print("Задайте размер масиву: ");
             size = scanner.nextInt();
-            if (size <= 0) {
-                System.out.println("Размер массива не может быть меньше или равен нулю");
-            }
         }
         while (size <= 0);
-        System.out.println("Задайте минимальный элемент массива: ");
+        System.out.print("Задайте минимальный элемент массива: ");
         min = scanner.nextInt();
-        System.out.println("Задайте максимальный элемент массива: ");
+        System.out.print("Задайте максимальный элемент массива: ");
         max = scanner.nextInt();
-        if (min > max) {
-            System.out.println("Минимальный элемент не может быть больше максимального");
-
-        }
         scanner.close();
 
-        int[] array;
-        array = Library.randomArray(size, min, max);
-        System.out.println(array);
-        Library library = new Library();
-        library.arrayMin(array);
-        library.maxIndex(array);
-    }
+        if (Library.checkSize(size)) {
+            int[] array = Library.randomArray(size, min, max);
+            System.out.print("Ваш массив: ");
+            for (int num : array) {
+                System.out.print(num + " ");
+            }
+            Library library = new Library();
+            int minimym = library.arrayMin(array);
+            System.out.println("Минимальный элемент масивва: " + minimym);
+            library.maxIndex(array);
+            System.out.println("Индекс максимально элемента масива: " + library.getIntMax());
+        }
 
         /* TODO: Нужно добавить считывание из консоли и зациклить при получении
             отрицательного значения массива
@@ -49,6 +46,7 @@ public class Main {
         library.arrayMin(a);
 
          */
+    }
 }
 
 

@@ -4,17 +4,20 @@ import java.util.Scanner;
 
 public class Calculator {
     public static void main(String[] args) {
+        run();
+    }
 
+    private static void run() {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Вас приветствует консольный калькулятор!");
+        System.out.println("Вас приветствует консольный калькулятор!");
         while (true) {
-            System.out.print("\nВведите выражение в формате 'число оператор число' числа от 1 до 10 (или 'QUIT' для выхода): ");
+            System.out.print("Введите выражение в формате 'число оператор число' числа от 1 до 10 (или 'QUIT' для выхода): ");
             String expression = scanner.nextLine();
             if (expression == null || expression.trim().isEmpty()) {
                 System.out.println("Вы ввели пустую строку, попробуйте еще раз.");
                 continue;
             }
-            if (expression.trim().equalsIgnoreCase("QUIT")) {
+            if ("QUIT".equalsIgnoreCase(expression.trim())) {
                 System.out.println("Калькулятор завершил работу!");
                 break;
             }
@@ -25,6 +28,7 @@ public class Calculator {
                 System.out.println(e.getMessage());
             }
         }
+
     }
 
     private static String processExpression(String input) {
@@ -35,29 +39,23 @@ public class Calculator {
         String number1 = parts[0];
         String operator = parts[1];
         String number2 = parts[2];
-        if (!operator.equals("+") && !operator.equals("-") && !operator.equals("*") && !operator.equals("/")) {
+        if (!"+".equals(operator) && !"-".equals(operator) && !"*".equals(operator) && !"/".equals(operator)) {
             throw new RuntimeException("Неверный оператор. Введите '+', '-', '*' или '/'.");
         }
         boolean firstArabic = isArabic(number1);
         boolean secondArabic = isArabic(number2);
         boolean firstRoman = isRoman(number1);
         boolean secondRoman = isRoman(number2);
-
         if (firstArabic && secondArabic) {
-            return calcArabic(number1, number2, operator); // НФТ 11
+            return calcArabic(number1, number2, operator);
         }
-
         if (firstRoman && secondRoman) {
-            return calcRoman(number1, number2, operator); // НФТ 12
+            return calcRoman(number1, number2, operator);
         }
-
         if (firstArabic) {
-
             throw new RuntimeException("Один из операндов не является арабским числом");
         }
-
         if (firstRoman) {
-
             throw new RuntimeException("Один из операндов не является римским числом");
         }
         throw new RuntimeException("Операнды не распознаны как арабские или римские числа");
@@ -75,16 +73,15 @@ public class Calculator {
     private static String calcArabic(String op1, String op2, String oper) {
         int a = Integer.parseInt(op1);
         int b = Integer.parseInt(op2);
-
-        // НФТ 6
-        if (a < 1 || a > 10 || b < 1 || b > 10) {
+        if (a > 10 || b > 10) {
             throw new RuntimeException("Один из операндов больше 10");
         }
-
+        if (a < 1 || b < 1) {
+            throw new RuntimeException("Один из операндов меньше 1");
+        }
         int res = applyOperation(a, b, oper);
         return String.valueOf(res);
     }
-
 
     private static int applyOperation(int a, int b, String operator) {
         switch (operator) {
@@ -102,23 +99,22 @@ public class Calculator {
                 }
             default:
                 throw new RuntimeException("Неверный оператор. Введите '+', '-', '*' или '/'.");
-
         }
     }
 
     private static boolean isRoman(String s) {
-        return s.matches("[IVXLCDM]+");
+        return s.matches("[IVXLC]+");   // Проверка на соответствие римскому числу без проверки на правильность записи
     }
 
     private static String calcRoman(String op1, String op2, String oper) {
         int a = romanToInt(op1);
         int b = romanToInt(op2);
-
-
-        if (a < 1 || a > 10 || b < 1 || b > 10) {
+        if (a > 10 || b > 10) {
             throw new RuntimeException("Один из операндов больше 10");
         }
-
+        if (a < 1 || b < 1) {
+            throw new RuntimeException("Один из операндов меньше 1");
+        }
         int res = applyOperation(a, b, oper);
         return intToRoman(res);
     }
@@ -150,10 +146,6 @@ public class Calculator {
                 return 50;
             case 'C':
                 return 100;
-            case 'D':
-                return 500;
-            case 'M':
-                return 1000;
             default:
                 throw new RuntimeException("Некорректный символ римского числа: " + c);
         }
@@ -164,12 +156,10 @@ public class Calculator {
             throw new RuntimeException("Результат римского выражения должен быть положительным");
         }
 
-        int[] values = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
-        String[] roman = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
-
+        int[] values = {100, 90, 50, 40, 10, 9, 5, 4, 1};
+        String[] roman = {"C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
         StringBuilder sb = new StringBuilder();
         int remaining = number;
-
         for (int i = 0; i < values.length; i++) {
             while (remaining >= values[i]) {
                 remaining -= values[i];
@@ -179,7 +169,3 @@ public class Calculator {
         return sb.toString();
     }
 }
-
-
-
-

@@ -14,6 +14,10 @@ public class Library {
     public static int[] randomArray(int size, int min, int max) {
         int[] x = new int[size];
         Random random = new Random();
+        if (min>=max){
+            System.out.println("Ошибка - минимальное значение больше или равно максимальному");
+            return new int[0];
+        }
         for (int i = 0; i < size; i++) {
             int rand = max - min + 1;
             x[i] = random.nextInt(rand) + min;

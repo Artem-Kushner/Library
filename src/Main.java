@@ -15,6 +15,10 @@ public class Main {
         min = scanner.nextInt();
         System.out.print("Задайте максимальный элемент массива: ");
         max = scanner.nextInt();
+        if (min>max){
+            scanner.close();
+            return;
+        }
         scanner.close();
 
         if (Library.checkSize(size)) {

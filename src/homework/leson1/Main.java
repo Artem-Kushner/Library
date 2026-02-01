@@ -6,6 +6,6 @@ public class Main {
         Dog dog = new Dog();
         cat.sayHello();
         dog.sayHello();
-        dog.catchCat();
+        dog.catchCat(cat);
     }
 }

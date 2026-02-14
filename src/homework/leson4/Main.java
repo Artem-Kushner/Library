@@ -10,5 +10,9 @@ public class Main {
         System.out.println(ph3.model +" " + ph3.number + " " + ph3.weight);
         ph1.receiveCall("Игорь");
         ph1.getNumber();
+        Phone ph4 = new Phone(95543241, "IPhone" , 246);
+        System.out.println(ph4.model +" " + ph4.number + " " + ph4.weight);
+        ph4.receiveCall("Петя", 65879056);
+        ph4.sendMessage(65879056, 65879057, 65879058);
     }
 }
